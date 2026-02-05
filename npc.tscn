@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://fcwyr4dfo1le"]
+
+[ext_resource type="Script" uid="uid://b48v3ju7i3vpx" path="res://npc.gd" id="1_kh24r"]
+[ext_resource type="FontFile" uid="uid://cpdowmwbnpupw" path="res://ByteBounce.ttf" id="1_xxcha"]
+[ext_resource type="Texture2D" uid="uid://c40l3ssggtqw8" path="res://text_bubble.png" id="2_kh24r"]
+
+[sub_resource type="Theme" id="Theme_ul7y6"]
+default_font = ExtResource("1_xxcha")
+default_font_size = 20
+
+[node name="NPC" type="Node2D"]
+script = ExtResource("1_kh24r")
+
+[node name="DialogueQuery" type="Label" parent="."]
+visible = false
+offset_left = -108.0
+offset_top = -127.0
+offset_right = 45.0
+offset_bottom = -91.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("1_xxcha")
+theme_override_font_sizes/font_size = 25
+text = "Tryk paa enter 
+for at tale med
+karakterer"
+
+[node name="DialogueBubble" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_ul7y6")
+
+[node name="DialogueOption2" type="Button" parent="DialogueBubble"]
+visible = false
+layout_mode = 0
+offset_left = -113.0
+offset_top = -33.0
+offset_right = -48.0
+offset_bottom = -13.0
+
+[node name="DialogueOption1" type="Button" parent="DialogueBubble"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.7510002
+anchor_top = -0.744
+anchor_right = -2.7510002
+anchor_bottom = -0.744
+offset_left = -2.9599915
+offset_top = -26.24
+offset_right = 62.04001
+offset_bottom = -6.24
+
+[node name="Sprite2D" type="Sprite2D" parent="DialogueBubble"]
+position = Vector2(-65.50001, -93.37499)
+scale = Vector2(0.31801468, 0.33304796)
+texture = ExtResource("2_kh24r")
+flip_h = true
+
+[node name="Dialogue" type="RichTextLabel" parent="DialogueBubble"]
+layout_mode = 0
+offset_left = -98.0
+offset_top = -128.0
+offset_right = -6.0
+offset_bottom = -88.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="DialogueBubble/DialogueOption2" to="." method="_on_dialogue_option_2_pressed"]
+[connection signal="pressed" from="DialogueBubble/DialogueOption1" to="." method="_on_dialogue_option_1_pressed"]

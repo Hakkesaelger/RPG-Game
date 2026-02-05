@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf2wcq6tbt620"]
+
+[ext_resource type="Texture2D" uid="uid://dwfjrt06stxu7" path="res://villager.png" id="1_vucva"]
+[ext_resource type="PackedScene" uid="uid://fcwyr4dfo1le" path="res://npc.tscn" id="3_kyemj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbtgs"]
+size = Vector2(147, 236.5)
+
+[node name="Villager" type="Area2D"]
+collision_mask = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_vucva")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-30.5, -59.75)
+shape = SubResource("RectangleShape2D_sbtgs")
+
+[node name="NPC" parent="." instance=ExtResource("3_kyemj")]
+dialogue_tree = {
+"begin": ["Velkommen, prins borgar", {
+"Hvordan gaar det?": "ork_quest_given"
+}],
+"ork_quest_elaboration": ["Fordi de stjaeler vores ting", {
+"Okay": ""
+}],
+"ork_quest_given": ["Draeb orker", {
+"Hvorfor": "ork_quest_elaboration",
+"Okay": ""
+}]
+}
+
+[connection signal="body_entered" from="." to="NPC" method="_on_body_entered"]
+[connection signal="body_exited" from="." to="NPC" method="_on_body_exited"]
